@@ -67,7 +67,6 @@ Admin Dashboard
 - TypeScript
 - Tailwind CSS
 - React Router DOM
-- Axios
 
 ### Backend
 - Node.js
