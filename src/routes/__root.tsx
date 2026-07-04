@@ -78,9 +78,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Zenith HR — Modern HRMS" },
-      { name: "description", content: "Zenith HR: an all-in-one HRMS for attendance, leave, payroll, and employee management." },
-      { property: "og:title", content: "Zenith HR — Modern HRMS" },
+      { title: "WORK SPHERE — Modern HRMS" },
+      { name: "description", content: "WORK SPHERE: an all-in-one HRMS for attendance, leave, payroll, and employee management." },
+      { property: "og:title", content: "WORK SPHERE — Modern HRMS" },
       { property: "og:description", content: "All-in-one HRMS for attendance, leave, payroll, and employee management." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

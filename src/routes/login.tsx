@@ -1,11 +1,24 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Building2, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { AlignCenter, AlignJustify, Building2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn, type Role } from "@/lib/hrms-store";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "spline-viewer": SplineViewerProps;
+    }
+  }
+}
+
+interface SplineViewerProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
+  url?: string;
+  loading?: "lazy" | "eager";
+}
 
 export const Route = createFileRoute("/login")({
   ssr: false,
@@ -18,6 +31,14 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<Role>("employee");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = "https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js";
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,30 +67,53 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 bg-background">
-      <div className="hidden lg:flex flex-col justify-between p-12 bg-sidebar text-sidebar-foreground">
-        <div className="flex items-center gap-2">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <Building2 className="h-5 w-5" />
-          </div>
-          <div className="text-lg font-semibold">Zenith HR</div>
+    <div className="min-h-screen grid lg:grid-cols-2 bg-black">
+      <div className="absolute inset-0 lg:relative lg:inset-auto flex flex-col justify-between p-8 lg:p-12 bg-black text-white overflow-hidden">
+        {/* Spline 3D Viewer Background */}
+        <div className="absolute inset-0 z-0">
+         <spline-viewer
+  url="https://prod.spline.design/LVWiO6yI0pyTBqEB/scene.splinecode"
+  style={
+    {
+      width: "100%",
+      marginLeft: "50px",
+      height: "100%",
+      display: "block",
+    } as React.CSSProperties
+  }
+/>
         </div>
-        <div className="space-y-5">
-          <h1 className="text-4xl font-semibold leading-tight tracking-tight">
-            Everything HR, in one calm workspace.
+
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/50 via-black/30 to-black/20 pointer-events-none" />
+
+        {/* Content overlay */}
+        <div className="relative z-20">
+          <div className="flex items-center gap-2">
+            <div className="grid h-10 w-10 place-items-center rounded-lg bg-amber-500 text-white">
+              <Building2 className="h-5 w-5" />
+            </div>
+            <div className="text-lg font-semibold text-white">WORK SPHERE</div>
+          </div>
+        </div>
+
+        <div className="relative z-20 space-y-5">
+          <h1  className="text-4xl font-semibold leading-tight tracking-tight text-white">
+          Work spere workspace
           </h1>
-          <p className="text-sidebar-foreground/70 max-w-md">
+          <p className="text-gray-200 max-w-md">
             Manage attendance, leave requests, payroll and your entire team — from a single elegant dashboard.
           </p>
           <div className="grid grid-cols-3 gap-3 max-w-md pt-4">
-            {["Attendance", "Leaves", "Payroll"].map((k) => (
-              <div key={k} className="rounded-lg border border-sidebar-border p-3 text-xs text-sidebar-foreground/80">
+            {/* {["Attendance", "Leaves", "Payroll"].map((k) => (
+              <div key={k} className="rounded-lg border border-gray-700 bg-gray-900/60 backdrop-blur-md p-3 text-xs text-gray-300">
                 {k}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
-        <div className="text-xs text-sidebar-foreground/50">© Zenith HR 2026</div>
+
+        <div className="relative z-20 text-xs text-gray-400">© WORK SPHERE 2026</div>
       </div>
 
       <div className="flex items-center justify-center p-6 lg:p-12">
@@ -78,9 +122,9 @@ function LoginPage() {
             <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground">
               <Building2 className="h-5 w-5" />
             </div>
-            <div className="text-base font-semibold">Zenith HR</div>
+            <div className="text-base font-semibold">WORK SPHERE</div>
           </div>
-          <h2 className="text-2xl font-semibold tracking-tight">Sign in to your account</h2>
+          <h2 className="text-2xl font-semibold tracking-tight text-white">Sign in to your account</h2>
           <p className="mt-1 text-sm text-muted-foreground">Access your HRMS workspace.</p>
 
           <form onSubmit={submit} className="mt-6 space-y-4">
@@ -98,12 +142,12 @@ function LoginPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" />
+              <Label htmlFor="email" style={{ color : "white"}}>Email</Label>
+              <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" className="bg-black/40 border-gray-700 text-white placeholder-gray-400" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
+             <Label htmlFor="password" style={{ color: "white" }}>  Password</Label>
+              <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="bg-black/40 border-gray-700 text-white placeholder-gray-400" />
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
@@ -113,7 +157,7 @@ function LoginPage() {
           </form>
 
           <div className="mt-6 rounded-lg border border-dashed border-border p-3 text-xs text-muted-foreground space-y-1">
-            <div className="font-medium text-foreground">Demo credentials</div>
+            <div className="font-medium text-foreground" style={{color : "white"}}>Demo credentials</div>
             <button type="button" className="underline underline-offset-2 hover:text-primary block" onClick={() => fillDemo("admin")}>
               admin@hrms.com / admin123 (Admin)
             </button>

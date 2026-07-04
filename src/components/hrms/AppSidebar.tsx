@@ -53,7 +53,7 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
           <Building2 className="h-5 w-5" />
         </div>
         <div>
-          <div className="text-sm font-semibold">Zenith HR</div>
+          <div className="text-sm font-semibold">WORK SPHERE</div>
           <div className="text-xs text-sidebar-foreground/60">
             {user?.role === "admin" ? "Admin Portal" : "Employee Portal"}
           </div>

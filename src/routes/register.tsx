@@ -57,13 +57,13 @@ function RegisterPage() {
           <div className="grid h-10 w-10 place-items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
             <Building2 className="h-5 w-5" />
           </div>
-          <div className="text-lg font-semibold">Zenith HR</div>
+          <div className="text-lg font-semibold">WORK SPHERE</div>
         </div>
         <div>
           <h1 className="text-4xl font-semibold leading-tight tracking-tight">Join your team's workspace.</h1>
           <p className="mt-4 text-sidebar-foreground/70 max-w-md">Register with your employee ID and start managing your work day.</p>
         </div>
-        <div className="text-xs text-sidebar-foreground/50">© Zenith HR 2026</div>
+        <div className="text-xs text-sidebar-foreground/50">© WORK SPHERE 2026</div>
       </div>
 
       <div className="flex items-center justify-center p-6 lg:p-12">
