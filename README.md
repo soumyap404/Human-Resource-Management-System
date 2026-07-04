@@ -103,4 +103,119 @@ Human-Resource-Management-System/
 │   └── styles.css
 │
 └── README.md
+```## Installation
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/<username>/Human-Resource-Management-System.git
+```
+
+### Navigate to the Project
+
+```bash
+cd Human-Resource-Management-System
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env` file in the backend directory.
+
+Example:
+
+```env
+PORT=5000
+
+MONGO_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+```
+
+---
+
+##  Running the Application
+
+### Frontend
+
+```bash
+npm run dev
+```
+
+### Backend
+
+```bash
+npm start
+```
+
+
+## User Roles
+
+### Employee
+
+- View Profile
+- Update Personal Information
+- Check In / Check Out
+- Apply for Leave
+- View Attendance
+- View Payroll
+
+### Admin / HR
+
+- Manage Employees
+- Monitor Attendance
+- Approve or Reject Leave Requests
+- Manage Payroll
+- Access Reports
+
+---
+
+##  Security Features
+
+- Password Hashing
+- JWT Authentication
+- Protected Routes
+- Role-Based Access Control
+- Secure API Endpoints
+- Input Validation
+
+---
+
+##  Future Enhancements
+
+- Email Notifications
+- Performance Evaluation
+- Employee Documents Management
+- Recruitment Module
+- Holiday Calendar
+- Department Management
+- Analytics Dashboard
+- Mobile Responsive Improvements
+- Dark Mode
+
+---
+
+##  License
+
+This project was developed for educational and hackathon purposes.
+
+---
+
+## 👨‍💻 Contributors
+
+- Soham Dey
+- Utsha Dey
+- Soumya Pramanik
+- Patotri Dey
+
+---
+
+##  Acknowledgements
+
+Built with ❤️ using React, Node.js, Express, MongoDB, and TypeScript.
 
