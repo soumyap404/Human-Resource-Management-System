@@ -9,38 +9,205 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthedSettingsRouteImport } from './routes/_authed.settings'
+import { Route as AuthedReportsRouteImport } from './routes/_authed.reports'
+import { Route as AuthedProfileRouteImport } from './routes/_authed.profile'
+import { Route as AuthedPayrollRouteImport } from './routes/_authed.payroll'
+import { Route as AuthedLeaveManagementRouteImport } from './routes/_authed.leave-management'
+import { Route as AuthedLeaveRouteImport } from './routes/_authed.leave'
+import { Route as AuthedEmployeesRouteImport } from './routes/_authed.employees'
+import { Route as AuthedDashboardRouteImport } from './routes/_authed.dashboard'
+import { Route as AuthedAttendanceRouteImport } from './routes/_authed.attendance'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedRoute = AuthedRouteImport.update({
+  id: '/_authed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedSettingsRoute = AuthedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedReportsRoute = AuthedReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedProfileRoute = AuthedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedPayrollRoute = AuthedPayrollRouteImport.update({
+  id: '/payroll',
+  path: '/payroll',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedLeaveManagementRoute = AuthedLeaveManagementRouteImport.update({
+  id: '/leave-management',
+  path: '/leave-management',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedLeaveRoute = AuthedLeaveRouteImport.update({
+  id: '/leave',
+  path: '/leave',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedEmployeesRoute = AuthedEmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedAttendanceRoute = AuthedAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => AuthedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/attendance': typeof AuthedAttendanceRoute
+  '/dashboard': typeof AuthedDashboardRoute
+  '/employees': typeof AuthedEmployeesRoute
+  '/leave': typeof AuthedLeaveRoute
+  '/leave-management': typeof AuthedLeaveManagementRoute
+  '/payroll': typeof AuthedPayrollRoute
+  '/profile': typeof AuthedProfileRoute
+  '/reports': typeof AuthedReportsRoute
+  '/settings': typeof AuthedSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/attendance': typeof AuthedAttendanceRoute
+  '/dashboard': typeof AuthedDashboardRoute
+  '/employees': typeof AuthedEmployeesRoute
+  '/leave': typeof AuthedLeaveRoute
+  '/leave-management': typeof AuthedLeaveManagementRoute
+  '/payroll': typeof AuthedPayrollRoute
+  '/profile': typeof AuthedProfileRoute
+  '/reports': typeof AuthedReportsRoute
+  '/settings': typeof AuthedSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authed': typeof AuthedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/_authed/attendance': typeof AuthedAttendanceRoute
+  '/_authed/dashboard': typeof AuthedDashboardRoute
+  '/_authed/employees': typeof AuthedEmployeesRoute
+  '/_authed/leave': typeof AuthedLeaveRoute
+  '/_authed/leave-management': typeof AuthedLeaveManagementRoute
+  '/_authed/payroll': typeof AuthedPayrollRoute
+  '/_authed/profile': typeof AuthedProfileRoute
+  '/_authed/reports': typeof AuthedReportsRoute
+  '/_authed/settings': typeof AuthedSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/attendance'
+    | '/dashboard'
+    | '/employees'
+    | '/leave'
+    | '/leave-management'
+    | '/payroll'
+    | '/profile'
+    | '/reports'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/attendance'
+    | '/dashboard'
+    | '/employees'
+    | '/leave'
+    | '/leave-management'
+    | '/payroll'
+    | '/profile'
+    | '/reports'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authed'
+    | '/login'
+    | '/register'
+    | '/_authed/attendance'
+    | '/_authed/dashboard'
+    | '/_authed/employees'
+    | '/_authed/leave'
+    | '/_authed/leave-management'
+    | '/_authed/payroll'
+    | '/_authed/profile'
+    | '/_authed/reports'
+    | '/_authed/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthedRoute: typeof AuthedRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +215,105 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authed/settings': {
+      id: '/_authed/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthedSettingsRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/reports': {
+      id: '/_authed/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthedReportsRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/profile': {
+      id: '/_authed/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthedProfileRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/payroll': {
+      id: '/_authed/payroll'
+      path: '/payroll'
+      fullPath: '/payroll'
+      preLoaderRoute: typeof AuthedPayrollRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/leave-management': {
+      id: '/_authed/leave-management'
+      path: '/leave-management'
+      fullPath: '/leave-management'
+      preLoaderRoute: typeof AuthedLeaveManagementRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/leave': {
+      id: '/_authed/leave'
+      path: '/leave'
+      fullPath: '/leave'
+      preLoaderRoute: typeof AuthedLeaveRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/employees': {
+      id: '/_authed/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof AuthedEmployeesRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/dashboard': {
+      id: '/_authed/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthedDashboardRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/attendance': {
+      id: '/_authed/attendance'
+      path: '/attendance'
+      fullPath: '/attendance'
+      preLoaderRoute: typeof AuthedAttendanceRouteImport
+      parentRoute: typeof AuthedRoute
+    }
   }
 }
 
+interface AuthedRouteChildren {
+  AuthedAttendanceRoute: typeof AuthedAttendanceRoute
+  AuthedDashboardRoute: typeof AuthedDashboardRoute
+  AuthedEmployeesRoute: typeof AuthedEmployeesRoute
+  AuthedLeaveRoute: typeof AuthedLeaveRoute
+  AuthedLeaveManagementRoute: typeof AuthedLeaveManagementRoute
+  AuthedPayrollRoute: typeof AuthedPayrollRoute
+  AuthedProfileRoute: typeof AuthedProfileRoute
+  AuthedReportsRoute: typeof AuthedReportsRoute
+  AuthedSettingsRoute: typeof AuthedSettingsRoute
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedAttendanceRoute: AuthedAttendanceRoute,
+  AuthedDashboardRoute: AuthedDashboardRoute,
+  AuthedEmployeesRoute: AuthedEmployeesRoute,
+  AuthedLeaveRoute: AuthedLeaveRoute,
+  AuthedLeaveManagementRoute: AuthedLeaveManagementRoute,
+  AuthedPayrollRoute: AuthedPayrollRoute,
+  AuthedProfileRoute: AuthedProfileRoute,
+  AuthedReportsRoute: AuthedReportsRoute,
+  AuthedSettingsRoute: AuthedSettingsRoute,
+}
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
