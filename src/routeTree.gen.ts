@@ -13,6 +13,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthedSettingsRouteImport } from './routes/_authed.settings'
 import { Route as AuthedReportsRouteImport } from './routes/_authed.reports'
 import { Route as AuthedProfileRouteImport } from './routes/_authed.profile'
 import { Route as AuthedPayrollRouteImport } from './routes/_authed.payroll'
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedSettingsRoute = AuthedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthedRoute,
 } as any)
 const AuthedReportsRoute = AuthedReportsRouteImport.update({
   id: '/reports',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
   '/reports': typeof AuthedReportsRoute
+  '/settings': typeof AuthedSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
   '/reports': typeof AuthedReportsRoute
+  '/settings': typeof AuthedSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/_authed/payroll': typeof AuthedPayrollRoute
   '/_authed/profile': typeof AuthedProfileRoute
   '/_authed/reports': typeof AuthedReportsRoute
+  '/_authed/settings': typeof AuthedSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/payroll'
     | '/profile'
     | '/reports'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/payroll'
     | '/profile'
     | '/reports'
+    | '/settings'
   id:
     | '__root__'
     | '/'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/_authed/payroll'
     | '/_authed/profile'
     | '/_authed/reports'
+    | '/_authed/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -202,6 +214,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authed/settings': {
+      id: '/_authed/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthedSettingsRouteImport
+      parentRoute: typeof AuthedRoute
     }
     '/_authed/reports': {
       id: '/_authed/reports'
@@ -271,6 +290,7 @@ interface AuthedRouteChildren {
   AuthedPayrollRoute: typeof AuthedPayrollRoute
   AuthedProfileRoute: typeof AuthedProfileRoute
   AuthedReportsRoute: typeof AuthedReportsRoute
+  AuthedSettingsRoute: typeof AuthedSettingsRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
@@ -282,6 +302,7 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedPayrollRoute: AuthedPayrollRoute,
   AuthedProfileRoute: AuthedProfileRoute,
   AuthedReportsRoute: AuthedReportsRoute,
+  AuthedSettingsRoute: AuthedSettingsRoute,
 }
 
 const AuthedRouteWithChildren =
