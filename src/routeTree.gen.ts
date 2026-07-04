@@ -14,6 +14,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthedProfileRouteImport } from './routes/_authed.profile'
+import { Route as AuthedLeaveRouteImport } from './routes/_authed.leave'
 import { Route as AuthedDashboardRouteImport } from './routes/_authed.dashboard'
 import { Route as AuthedAttendanceRouteImport } from './routes/_authed.attendance'
 
@@ -41,6 +42,11 @@ const AuthedProfileRoute = AuthedProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedLeaveRoute = AuthedLeaveRouteImport.update({
+  id: '/leave',
+  path: '/leave',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/attendance': typeof AuthedAttendanceRoute
   '/dashboard': typeof AuthedDashboardRoute
+  '/leave': typeof AuthedLeaveRoute
   '/profile': typeof AuthedProfileRoute
 }
 export interface FileRoutesByTo {
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/attendance': typeof AuthedAttendanceRoute
   '/dashboard': typeof AuthedDashboardRoute
+  '/leave': typeof AuthedLeaveRoute
   '/profile': typeof AuthedProfileRoute
 }
 export interface FileRoutesById {
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/_authed/attendance': typeof AuthedAttendanceRoute
   '/_authed/dashboard': typeof AuthedDashboardRoute
+  '/_authed/leave': typeof AuthedLeaveRoute
   '/_authed/profile': typeof AuthedProfileRoute
 }
 export interface FileRouteTypes {
@@ -86,9 +95,17 @@ export interface FileRouteTypes {
     | '/register'
     | '/attendance'
     | '/dashboard'
+    | '/leave'
     | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/attendance' | '/dashboard' | '/profile'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/attendance'
+    | '/dashboard'
+    | '/leave'
+    | '/profile'
   id:
     | '__root__'
     | '/'
@@ -97,6 +114,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/_authed/attendance'
     | '/_authed/dashboard'
+    | '/_authed/leave'
     | '/_authed/profile'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +162,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedProfileRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/leave': {
+      id: '/_authed/leave'
+      path: '/leave'
+      fullPath: '/leave'
+      preLoaderRoute: typeof AuthedLeaveRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/dashboard': {
       id: '/_authed/dashboard'
       path: '/dashboard'
@@ -164,12 +189,14 @@ declare module '@tanstack/react-router' {
 interface AuthedRouteChildren {
   AuthedAttendanceRoute: typeof AuthedAttendanceRoute
   AuthedDashboardRoute: typeof AuthedDashboardRoute
+  AuthedLeaveRoute: typeof AuthedLeaveRoute
   AuthedProfileRoute: typeof AuthedProfileRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedAttendanceRoute: AuthedAttendanceRoute,
   AuthedDashboardRoute: AuthedDashboardRoute,
+  AuthedLeaveRoute: AuthedLeaveRoute,
   AuthedProfileRoute: AuthedProfileRoute,
 }
 
