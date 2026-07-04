@@ -15,6 +15,7 @@ import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthedProfileRouteImport } from './routes/_authed.profile'
 import { Route as AuthedPayrollRouteImport } from './routes/_authed.payroll'
+import { Route as AuthedLeaveManagementRouteImport } from './routes/_authed.leave-management'
 import { Route as AuthedLeaveRouteImport } from './routes/_authed.leave'
 import { Route as AuthedEmployeesRouteImport } from './routes/_authed.employees'
 import { Route as AuthedDashboardRouteImport } from './routes/_authed.dashboard'
@@ -49,6 +50,11 @@ const AuthedPayrollRoute = AuthedPayrollRouteImport.update({
   path: '/payroll',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedLeaveManagementRoute = AuthedLeaveManagementRouteImport.update({
+  id: '/leave-management',
+  path: '/leave-management',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedLeaveRoute = AuthedLeaveRouteImport.update({
   id: '/leave',
   path: '/leave',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthedDashboardRoute
   '/employees': typeof AuthedEmployeesRoute
   '/leave': typeof AuthedLeaveRoute
+  '/leave-management': typeof AuthedLeaveManagementRoute
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
 }
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthedDashboardRoute
   '/employees': typeof AuthedEmployeesRoute
   '/leave': typeof AuthedLeaveRoute
+  '/leave-management': typeof AuthedLeaveManagementRoute
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
 }
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/_authed/dashboard': typeof AuthedDashboardRoute
   '/_authed/employees': typeof AuthedEmployeesRoute
   '/_authed/leave': typeof AuthedLeaveRoute
+  '/_authed/leave-management': typeof AuthedLeaveManagementRoute
   '/_authed/payroll': typeof AuthedPayrollRoute
   '/_authed/profile': typeof AuthedProfileRoute
 }
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/employees'
     | '/leave'
+    | '/leave-management'
     | '/payroll'
     | '/profile'
   fileRoutesByTo: FileRoutesByTo
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/employees'
     | '/leave'
+    | '/leave-management'
     | '/payroll'
     | '/profile'
   id:
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/_authed/dashboard'
     | '/_authed/employees'
     | '/_authed/leave'
+    | '/_authed/leave-management'
     | '/_authed/payroll'
     | '/_authed/profile'
   fileRoutesById: FileRoutesById
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedPayrollRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/leave-management': {
+      id: '/_authed/leave-management'
+      path: '/leave-management'
+      fullPath: '/leave-management'
+      preLoaderRoute: typeof AuthedLeaveManagementRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/leave': {
       id: '/_authed/leave'
       path: '/leave'
@@ -229,6 +248,7 @@ interface AuthedRouteChildren {
   AuthedDashboardRoute: typeof AuthedDashboardRoute
   AuthedEmployeesRoute: typeof AuthedEmployeesRoute
   AuthedLeaveRoute: typeof AuthedLeaveRoute
+  AuthedLeaveManagementRoute: typeof AuthedLeaveManagementRoute
   AuthedPayrollRoute: typeof AuthedPayrollRoute
   AuthedProfileRoute: typeof AuthedProfileRoute
 }
@@ -238,6 +258,7 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedDashboardRoute: AuthedDashboardRoute,
   AuthedEmployeesRoute: AuthedEmployeesRoute,
   AuthedLeaveRoute: AuthedLeaveRoute,
+  AuthedLeaveManagementRoute: AuthedLeaveManagementRoute,
   AuthedPayrollRoute: AuthedPayrollRoute,
   AuthedProfileRoute: AuthedProfileRoute,
 }
