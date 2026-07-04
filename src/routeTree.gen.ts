@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthedProfileRouteImport } from './routes/_authed.profile'
 import { Route as AuthedPayrollRouteImport } from './routes/_authed.payroll'
 import { Route as AuthedLeaveRouteImport } from './routes/_authed.leave'
+import { Route as AuthedEmployeesRouteImport } from './routes/_authed.employees'
 import { Route as AuthedDashboardRouteImport } from './routes/_authed.dashboard'
 import { Route as AuthedAttendanceRouteImport } from './routes/_authed.attendance'
 
@@ -53,6 +54,11 @@ const AuthedLeaveRoute = AuthedLeaveRouteImport.update({
   path: '/leave',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedEmployeesRoute = AuthedEmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedDashboardRoute = AuthedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/attendance': typeof AuthedAttendanceRoute
   '/dashboard': typeof AuthedDashboardRoute
+  '/employees': typeof AuthedEmployeesRoute
   '/leave': typeof AuthedLeaveRoute
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/attendance': typeof AuthedAttendanceRoute
   '/dashboard': typeof AuthedDashboardRoute
+  '/employees': typeof AuthedEmployeesRoute
   '/leave': typeof AuthedLeaveRoute
   '/payroll': typeof AuthedPayrollRoute
   '/profile': typeof AuthedProfileRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/_authed/attendance': typeof AuthedAttendanceRoute
   '/_authed/dashboard': typeof AuthedDashboardRoute
+  '/_authed/employees': typeof AuthedEmployeesRoute
   '/_authed/leave': typeof AuthedLeaveRoute
   '/_authed/payroll': typeof AuthedPayrollRoute
   '/_authed/profile': typeof AuthedProfileRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/attendance'
     | '/dashboard'
+    | '/employees'
     | '/leave'
     | '/payroll'
     | '/profile'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/attendance'
     | '/dashboard'
+    | '/employees'
     | '/leave'
     | '/payroll'
     | '/profile'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/_authed/attendance'
     | '/_authed/dashboard'
+    | '/_authed/employees'
     | '/_authed/leave'
     | '/_authed/payroll'
     | '/_authed/profile'
@@ -188,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedLeaveRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/employees': {
+      id: '/_authed/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof AuthedEmployeesRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/dashboard': {
       id: '/_authed/dashboard'
       path: '/dashboard'
@@ -208,6 +227,7 @@ declare module '@tanstack/react-router' {
 interface AuthedRouteChildren {
   AuthedAttendanceRoute: typeof AuthedAttendanceRoute
   AuthedDashboardRoute: typeof AuthedDashboardRoute
+  AuthedEmployeesRoute: typeof AuthedEmployeesRoute
   AuthedLeaveRoute: typeof AuthedLeaveRoute
   AuthedPayrollRoute: typeof AuthedPayrollRoute
   AuthedProfileRoute: typeof AuthedProfileRoute
@@ -216,6 +236,7 @@ interface AuthedRouteChildren {
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedAttendanceRoute: AuthedAttendanceRoute,
   AuthedDashboardRoute: AuthedDashboardRoute,
+  AuthedEmployeesRoute: AuthedEmployeesRoute,
   AuthedLeaveRoute: AuthedLeaveRoute,
   AuthedPayrollRoute: AuthedPayrollRoute,
   AuthedProfileRoute: AuthedProfileRoute,
